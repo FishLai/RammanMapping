@@ -14,9 +14,8 @@ class TemplateWx(wx.Frame):
     def __init__(self, *args, **kw):
         #ensure the parent's __init__ is called
         super(TemplateWx, self).__init__(*args, **kw)
-        
         #create a panel
-        pnl = wx.Panel(self)
+        #pnl = wx.Panel(self)
         
         #create a menu bar
         self.makeMenuBar()
