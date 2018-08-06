@@ -46,15 +46,15 @@ class SeparatePeak(tw.TemplateWx):
 		
 		bsizer_center = wx.BoxSizer(wx.HORIZONTAL)
 		#tip text for load direction
-		st_IBfile = wx.StaticText(pnl, ID_DefaultText, "File direction : ", style = wx.TE_LEFT)
+		st_IBfile = wx.StaticText(pnl, ID_DefaultText, "File directory : ", style = wx.TE_LEFT)
 		font_IBfile = st_IBfile.GetFont()
 		font_IBfile = font_IBfile.Bold()
 		bsizer_center.Add(st_IBfile, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
 		#input textBox for load direction
-		inputBox_file = wx.TextCtrl(pnl, -1, value ="the data direction", style = wx.TE_LEFT)
+		inputBox_file = wx.TextCtrl(pnl, -1, value ="the data directory", style = wx.TE_LEFT)
 		bsizer_center.Add(inputBox_file, proportion = 1, flag = wx.EXPAND | wx.ALL, border = 5)
 		#load file button
-		btn_load = wx.Button(pnl, ID_Btn, "&file...")
+		btn_load = wx.Button(pnl, ID_Btn, "&folder...")
 		bsizer_center.Add(btn_load, proportion = 1, flag = wx.EXPAND | wx.ALL, border = 5)
 		
 		bsizer_bottom = wx.BoxSizer(wx.HORIZONTAL)
