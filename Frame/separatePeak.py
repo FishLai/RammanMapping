@@ -6,52 +6,74 @@ import TemplateWx as tw
 import wx
 from wx.lib.sized_controls import border
 
-ID_Button = 100
+ID_Btn = 100
 ID_DefaultText = 101
 class SeparatePeak(tw.TemplateWx):
 
 	def __init__(self, *args, **kws):
 		super(SeparatePeak, self).__init__(*args, **kws)
-		
 		self.makeMenuBar()
 		self.extendMenuBar()
-		self.exButton()
 		self.Face()
 	'''
 	some guide word 
 	'''
 	def Face(self):
 		pnl = wx.Panel(self)
+		
+		bsizer_title = wx.BoxSizer(wx.VERTICAL)
+		#simple Title
 		st_name = wx.StaticText(pnl, ID_DefaultText, label = "Try to divide peak", pos = (25, 25))
 		font = st_name.GetFont()
 		font.PointSize += 10
 		font = font.Bold()
 		st_name.SetFont(font)
-		st_name.Style = wx.TE_LEFT
+		st_name.Style = wx.TE_LEFT				
+		bsizer_title.Add(st_name, proportion = 0, flag =wx.EXPAND | wx.ALL, border = 5)
 		
-		st_IBfile = wx.StaticText(pnl, ID_DefaultText, "File direction : ", style = wx.TE_LEFT)
-		font_IBfile = st_IBfile.GetFont().Bold()	
-		inputBox_file = wx.TextCtrl(pnl, -1, value ="fuck", style = wx.TE_LEFT)
+		bsizer_top = wx.BoxSizer(wx.HORIZONTAL)
+		#tip for range set
+		st_range = wx.StaticText(pnl, -1, "set range : ", style = wx.TE_LEFT)
+		IB_lowerFloor = wx.TextCtrl(pnl, -1, "", style = wx.TE_LEFT)
+		st_to = wx.StaticText(pnl, -1, " to ", style = wx.TE_LEFT)
+		IB_ceiling = wx.TextCtrl(pnl, -1, "", style = wx.TE_LEFT)
+		bsizer_top.Add(st_range, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5) 	
+		bsizer_top.Add(IB_lowerFloor, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
+		bsizer_top.Add(st_to, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
+		bsizer_top.Add(IB_ceiling, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
 		
 		
-		bsizer_top = wx.BoxSizer(wx.VERTICAL)
+		
 		bsizer_center = wx.BoxSizer(wx.HORIZONTAL)
-		bsizer_bottom = wx.BoxSizer(wx.HORIZONTAL)
-		
-		bsizer_top.Add(st_name, proportion = 0, flag =wx.EXPAND | wx.ALL, border = 5)
+		#tip text for load direction
+		st_IBfile = wx.StaticText(pnl, ID_DefaultText, "File direction : ", style = wx.TE_LEFT)
+		font_IBfile = st_IBfile.GetFont()
+		font_IBfile = font_IBfile.Bold()
 		bsizer_center.Add(st_IBfile, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
+		#input textBox for load direction
+		inputBox_file = wx.TextCtrl(pnl, -1, value ="the data direction", style = wx.TE_LEFT)
 		bsizer_center.Add(inputBox_file, proportion = 1, flag = wx.EXPAND | wx.ALL, border = 5)
+		#load file button
+		btn_load = wx.Button(pnl, ID_Btn, "&file...")
+		bsizer_center.Add(btn_load, proportion = 1, flag = wx.EXPAND | wx.ALL, border = 5)
+		
+		bsizer_bottom = wx.BoxSizer(wx.HORIZONTAL)
+		# Button for start convert
+		btn_start = wx.Button(pnl, ID_Btn, "Divide")
+		bsizer_bottom.Add(btn_start, proportion = 0, border = 5)
+		
+
 		
 		bsizer_all = wx.BoxSizer(wx.VERTICAL)
-		bsizer_all.Add(bsizer_top, proportion = 0, flag = wx.EXPAND | wx.ALL, border =5)
+		bsizer_all.Add(bsizer_title, proportion = 0, flag = wx.EXPAND | wx.ALL, border =5)
+		bsizer_all.Add(bsizer_top, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
 		bsizer_all.Add(bsizer_center, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
+		bsizer_all.Add(bsizer_bottom, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
+		
 		
 		pnl.SetSizer(bsizer_all)
-	'''
-	Buttons start
-	'''	
-	def exButton(self):
-		pass
+
+		
 	
 	'''
 	Menus start
