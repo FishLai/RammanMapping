@@ -55,6 +55,7 @@ class SeparatePeak(tw.TemplateWx):
 		bsizer_center.Add(inputBox_file, proportion = 1, flag = wx.EXPAND | wx.ALL, border = 5)
 		#load file button
 		btn_load = wx.Button(pnl, ID_Btn, "&folder...")
+		btn_load.Bind(wx.EVT_BUTTON, self.OnloadDir)
 		bsizer_center.Add(btn_load, proportion = 1, flag = wx.EXPAND | wx.ALL, border = 5)
 		
 		bsizer_bottom = wx.BoxSizer(wx.HORIZONTAL)
@@ -81,11 +82,15 @@ class SeparatePeak(tw.TemplateWx):
 	def extendMenuBar(self):
 		#insert 'File' item
 		loadFileItem = wx.MenuItem(None, id = 111, text = "loadFile", helpString="feed me data file")
-		self.Bind(wx.EVT_MENU, self.OnloadFile, loadFileItem)
+		self.Bind(wx.EVT_MENU, self.OnloadDir, loadFileItem)
 		self.GetMenuBar().GetMenu(0).Insert(0, loadFileItem);
 		
-	def OnloadFile(self, event):
-		wx.MessageBox("hi")
+	def OnloadDir(self, event):
+		dlg = wx.DirDialog(self, "choose a directory:", style = wx.DD_DEFAULT_STYLE)
+		
+		if dlg.ShowModal() == wx.ID_OK:
+			print("Your chose %s" % dlg.GetPath())
+		dlg.Destroy()
 	
 
 
