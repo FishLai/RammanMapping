@@ -18,3 +18,6 @@ def pichFile(directory):
             filePth = os.path.join(Path, fn)
             f.append(filePth)
     return f
+
+def exportFile():
+    pass
