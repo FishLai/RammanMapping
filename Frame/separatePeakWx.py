@@ -122,7 +122,7 @@ class SeparatePeak(tw.TemplateWx):
 
 if __name__ == "__main__":
 	app = wx.App()
-	frm = SeparatePeak(None, title = "uncomplete_panelContent", size = (1280, 720))
+	frm = SeparatePeak(None, title = "divideData.ver1", size = (1280, 720))
 	frm.Show()
 	app.MainLoop()
 		
