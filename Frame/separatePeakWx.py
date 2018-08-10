@@ -5,6 +5,7 @@ by FishLai
 import TemplateWx as tw
 import wx
 from wx.lib.sized_controls import border
+import doIt
 
 ID_Btn = 100
 ID_DefaultText = 101
@@ -34,9 +35,11 @@ class SeparatePeak(tw.TemplateWx):
 		bsizer_top = wx.BoxSizer(wx.HORIZONTAL)
 		#tip for range set
 		st_range = wx.StaticText(pnl, -1, "set range : ", style = wx.TE_LEFT)
-		IB_lowerFloor = wx.TextCtrl(pnl, -1, "", style = wx.TE_LEFT)
+		self.IB_lowerFloor = wx.TextCtrl(pnl, -1, "", style = wx.TE_LEFT)
+		IB_lowerFloor = self.IB_lowerFloor
 		st_to = wx.StaticText(pnl, -1, " to ", style = wx.TE_LEFT)
-		IB_ceiling = wx.TextCtrl(pnl, -1, "", style = wx.TE_LEFT)
+		self.IB_ceiling = wx.TextCtrl(pnl, -1, "", style = wx.TE_LEFT)
+		IB_ceiling = self.IB_ceiling
 		bsizer_top.Add(st_range, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5) 	
 		bsizer_top.Add(IB_lowerFloor, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
 		bsizer_top.Add(st_to, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
@@ -51,7 +54,8 @@ class SeparatePeak(tw.TemplateWx):
 		font_IBfile = font_IBfile.Bold()
 		bsizer_center.Add(st_IBfile, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
 		#input textBox for load direction
-		inputBox_file = wx.TextCtrl(pnl, -1, value ="the data directory", style = wx.TE_LEFT)
+		self.inputBox_file = wx.TextCtrl(pnl, -1, value ="the data directory", style = wx.TE_LEFT)
+		inputBox_file = self.inputBox_file
 		bsizer_center.Add(inputBox_file, proportion = 1, flag = wx.EXPAND | wx.ALL, border = 5)
 		#load file button
 		btn_load = wx.Button(pnl, ID_Btn, "&folder...")
@@ -61,6 +65,7 @@ class SeparatePeak(tw.TemplateWx):
 		bsizer_bottom = wx.BoxSizer(wx.HORIZONTAL)
 		# Button for start convert
 		btn_start = wx.Button(pnl, ID_Btn, "Divide")
+		btn_start.Bind(wx.EVT_BUTTON, self.sendValue)
 		bsizer_bottom.Add(btn_start, proportion = 0, border = 5)
 		
 
@@ -77,21 +82,34 @@ class SeparatePeak(tw.TemplateWx):
 		
 	
 	'''
-	Menus start
+	event in menu
 	'''		
 	def extendMenuBar(self):
 		#insert 'File' item
 		loadFileItem = wx.MenuItem(None, id = 111, text = "loadFile", helpString="feed me data file")
 		self.Bind(wx.EVT_MENU, self.OnloadDir, loadFileItem)
 		self.GetMenuBar().GetMenu(0).Insert(0, loadFileItem);
-		
-	def OnloadDir(self, event):
-		dlg = wx.DirDialog(self, "choose a directory:", style = wx.DD_DEFAULT_STYLE)
-		
-		if dlg.ShowModal() == wx.ID_OK:
-			print("Your chose %s" % dlg.GetPath())
-		dlg.Destroy()
 	
+	'''
+	event in menu and face
+	'''	
+	def OnloadDir(self, event):
+		dlg = wx.DirDialog(self, "choose a directory", style = wx.DD_DEFAULT_STYLE)
+		if dlg.ShowModal() == wx.ID_OK:
+			#print("Your chose %s" % dlg.GetPath())
+			pth = dlg.GetPath()
+			self.inputBox_file.SetValue(pth)					
+		dlg.Destroy()
+	'''
+	event in face
+	'''
+	def sendValue(self, event):
+		wnFloor = self.IB_ceiling.GetValue()
+		wnCeiling = self.IB_lowerFloor.GetValue()
+		directory = self.inputBox_file.GetValue()
+		self.params = [wnFloor, wnCeiling, directory]
+		doIt.doIt(params)
+		return params
 
 
 if __name__ == "__main__":
