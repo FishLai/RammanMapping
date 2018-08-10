@@ -2,7 +2,7 @@
 2017/08/01
 by FishLai
 '''
-from ..src import TemplateWx as tw
+import TemplateWx as tw
 import wx
 from wx.lib.sized_controls import border
 import doIt
