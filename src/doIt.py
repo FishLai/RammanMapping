@@ -1,5 +1,5 @@
 '''
-Created on 2018年8月10日
+Created on 2018/8/10/
 
 @author: pc
 filedirs, files' dorectories; filedir, file's directory

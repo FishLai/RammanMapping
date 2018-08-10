@@ -1,5 +1,5 @@
 '''
-Created on 2018年8月6日
+Created on 2018/8/6/
 
 @author: quan_
 WN means wave number, RI: Raman Intensity
@@ -31,7 +31,8 @@ def divideData(directory, wnFloor, wnCeiling, IF = None, IC = None):
         
     return WN, RI, index_floor, index_ceiling
 
-
+'''
 if __name__ == '__main__':
     x, y, i_f, i_c = divideData("D:/Users/pc/Downloads/FishLai/Temp/test_ramanMapping/test-z7.9168y37.5310x44.7104.txt", 200, 250)
     print(x, i_f, i_c)
+'''

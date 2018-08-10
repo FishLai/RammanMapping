@@ -1,5 +1,5 @@
 '''
-Created on 2018年8月7日
+Created on 2018/8/7/
 
 @author: quan_
 fd, file directory
