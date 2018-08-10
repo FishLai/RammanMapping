@@ -20,7 +20,8 @@ class SeparatePeak(tw.TemplateWx):
 	some guide word 
 	'''
 	def Face(self):
-		pnl = wx.Panel(self)
+		self.pnl = wx.Panel(self)
+		pnl = self.pnl
 		
 		bsizer_title = wx.BoxSizer(wx.VERTICAL)
 		#simple Title
@@ -62,7 +63,8 @@ class SeparatePeak(tw.TemplateWx):
 		btn_load.Bind(wx.EVT_BUTTON, self.OnloadDir)
 		bsizer_center.Add(btn_load, proportion = 1, flag = wx.EXPAND | wx.ALL, border = 5)
 		
-		bsizer_bottom = wx.BoxSizer(wx.HORIZONTAL)
+		self.bsizer_bottom = wx.BoxSizer(wx.HORIZONTAL)
+		bsizer_bottom = self.bsizer_bottom
 		# Button for start convert
 		btn_start = wx.Button(pnl, ID_Btn, "Divide")
 		btn_start.Bind(wx.EVT_BUTTON, self.sendValue)
@@ -70,7 +72,8 @@ class SeparatePeak(tw.TemplateWx):
 		
 
 		
-		bsizer_all = wx.BoxSizer(wx.VERTICAL)
+		self.bsizer_all = wx.BoxSizer(wx.VERTICAL)
+		bsizer_all = self.bsizer_all
 		bsizer_all.Add(bsizer_title, proportion = 0, flag = wx.EXPAND | wx.ALL, border =5)
 		bsizer_all.Add(bsizer_top, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
 		bsizer_all.Add(bsizer_center, proportion = 0, flag = wx.EXPAND | wx.ALL, border = 5)
@@ -104,12 +107,17 @@ class SeparatePeak(tw.TemplateWx):
 	event in face
 	'''
 	def sendValue(self, event):
-		wnFloor = self.IB_ceiling.GetValue()
-		wnCeiling = self.IB_lowerFloor.GetValue()
+		wnFloor = int(self.IB_lowerFloor.GetValue())
+		wnCeiling = int(self.IB_ceiling.GetValue())
 		directory = self.inputBox_file.GetValue()
-		self.params = [wnFloor, wnCeiling, directory]
+		params = [wnFloor, wnCeiling, directory]
+		print(params)
 		doIt.doIt(params)
-		return params
+		
+		st_finish = wx.StaticText(self.pnl, -1, "Finish Divide Data", style = wx.TE_LEFT)
+		self.bsizer_bottom.Add(st_finish, proportion = 0, border = 5)
+		return True
+		
 
 
 if __name__ == "__main__":
