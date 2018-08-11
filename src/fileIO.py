@@ -15,7 +15,9 @@ def pichFile(directory):
     fd = []
     filens = []
     isInfo = 0
-    for Path, dirs, fns in os.walk(directory):
+    exclude = []
+    for Path, dirs, fns in os.walk(directory, topdown = True):
+        dirs[:] = [d for d in dirs if d in exclude]
         for fn in fns:
             if isInfo == 0 and "Info" in fn:
                 isInfo = 1

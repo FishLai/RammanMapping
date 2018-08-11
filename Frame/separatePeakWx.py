@@ -69,6 +69,9 @@ class SeparatePeak(tw.TemplateWx):
 		btn_start = wx.Button(pnl, ID_Btn, "Divide")
 		btn_start.Bind(wx.EVT_BUTTON, self.sendValue)
 		bsizer_bottom.Add(btn_start, proportion = 0, border = 5)
+		self.st_finish = wx.StaticText(self.pnl, -1, "", style = wx.TE_LEFT, border = 10)
+		st_finish = self.st_finish
+		bsizer_bottom.Add(st_finish, proportion = 0, border = 5)
 		
 
 		
@@ -107,6 +110,7 @@ class SeparatePeak(tw.TemplateWx):
 	event in face
 	'''
 	def sendValue(self, event):
+		self.st_finish.SetLabel("")
 		wnFloor = int(self.IB_lowerFloor.GetValue())
 		wnCeiling = int(self.IB_ceiling.GetValue())
 		directory = self.inputBox_file.GetValue()
@@ -114,8 +118,7 @@ class SeparatePeak(tw.TemplateWx):
 		print(params)
 		doIt.doIt(params)
 		
-		st_finish = wx.StaticText(self.pnl, -1, "Finish Divide Data", style = wx.TE_LEFT)
-		self.bsizer_bottom.Add(st_finish, proportion = 0, border = 5)
+		self.st_finish.SetLabel("finished divide data")
 		return True
 		
 

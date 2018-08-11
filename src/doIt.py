@@ -15,7 +15,8 @@ def doIt(parameters):
     I_F = None
     I_C = None
     filedirs, filens = fileIO.pichFile(directory)
-    for i in range(len(filedirs)-1):
+    print(len(filedirs))
+    for i in range(len(filedirs)):
         wn, ri, I_F, I_C = dividData.divideData(filedirs[i], wnFloor, wnCeiling, I_F, I_C)
         fileIO.exportFile(directory, filens[i], wn, ri, wnFloor, wnCeiling)
     return True
