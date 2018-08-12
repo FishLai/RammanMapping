@@ -69,7 +69,7 @@ class SeparatePeak(tw.TemplateWx):
 		btn_start = wx.Button(pnl, ID_Btn, "Divide")
 		btn_start.Bind(wx.EVT_BUTTON, self.sendValue)
 		bsizer_bottom.Add(btn_start, proportion = 0, border = 5)
-		self.st_finish = wx.StaticText(self.pnl, -1, "", style = wx.TE_LEFT, border = 10)
+		self.st_finish = wx.StaticText(self.pnl, -1, "", style = wx.TE_LEFT)
 		st_finish = self.st_finish
 		bsizer_bottom.Add(st_finish, proportion = 0, border = 5)
 		
